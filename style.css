@@ -1,0 +1,122 @@
+:root {
+  --bg: #0d0d0e;
+  --bg-alt: #151517;
+  --text: #edeae3;
+  --text-dim: #8c877d;
+  --accent: #c1893e;
+  --line: #2a2a2e;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.5; }
+h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; }
+a { color: inherit; }
+
+/* ---------- NAV ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 6vw;
+  background: rgba(13,13,14,0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav__brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+.nav__logo { height: 28px; width: auto; }
+.nav__name { font-family: 'Fraunces', serif; font-size: 1.05rem; }
+.nav__links { display: flex; gap: 2rem; }
+.nav__links a { text-decoration: none; font-size: 0.9rem; color: var(--text-dim); transition: color 0.2s; }
+.nav__links a:hover { color: var(--text); }
+
+/* ---------- INTRO ---------- */
+.intro { padding: 14vh 6vw 8vh; }
+.intro__label { font-size: 0.85rem; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 0.75rem; }
+.intro__title { font-size: clamp(2.5rem, 7vw, 5rem); }
+
+/* ---------- GRID (largeurs variables / dispersion) ---------- */
+.grid-wrapper { padding: 4vh 6vw 12vh; }
+.grid { display: flex; flex-direction: column; gap: 6vh; }
+
+.proj { position: relative; display: block; text-decoration: none; color: var(--text); }
+
+.proj--full { width: 100%; }
+.proj--two-thirds { width: 66%; margin: 0 auto; }
+.proj--offset-left { width: 58%; margin-right: auto; }
+.proj--offset-right { width: 58%; margin-left: auto; }
+
+.proj__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--bg-alt);
+  transition: transform 0.5s ease;
+}
+.proj.is-active .proj__media { transform: scale(1.04); }
+
+.proj__image, .proj__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+.proj__video { opacity: 0; }
+.proj.is-active .proj__video { opacity: 1; }
+.proj.is-active .proj__image { opacity: 0; }
+
+.proj__caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  background: linear-gradient(180deg, transparent 40%, rgba(13,13,14,0.85) 100%);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+.proj.is-active .proj__caption { opacity: 1; transform: translateY(0); }
+.proj.align-center .proj__caption { align-items: center; text-align: center; }
+.proj.align-left .proj__caption { align-items: flex-start; text-align: left; }
+
+.proj__caption h3 { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.proj__caption p { color: var(--text-dim); font-size: 0.95rem; max-width: 40ch; margin-bottom: 0.5rem; }
+.proj__meta { font-size: 0.8rem; color: var(--accent); }
+
+@media (max-width: 720px) {
+  .proj--two-thirds, .proj--offset-left, .proj--offset-right { width: 100%; }
+}
+
+/* ---------- DETAIL PAGE ---------- */
+.detail { padding: 12vh 6vw; max-width: 1000px; margin: 0 auto; }
+.detail__video { width: 100%; aspect-ratio: 16/9; background: var(--bg-alt); margin-bottom: 2.5rem; }
+.detail__info h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+.detail__meta { color: var(--accent); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.detail__desc { color: var(--text-dim); max-width: 60ch; margin-bottom: 2rem; }
+.detail__back { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; }
+.detail__back:hover { color: var(--text); }
+
+/* ---------- SIMPLE PAGES (about / contact) ---------- */
+.page { padding: 14vh 6vw; max-width: 700px; }
+.page h1 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+.page p { color: var(--text-dim); }
+
+/* ---------- CONTACT FOOTER ---------- */
+.contact { padding: 10vh 6vw 6vh; border-top: 1px solid var(--line); }
+.contact h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+.contact__link { color: var(--accent); font-size: 1.1rem; text-decoration: none; display: inline-block; }
+.contact__socials { margin-top: 2rem; display: flex; gap: 1.5rem; }
+.contact__socials a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+.contact__socials a:hover { color: var(--text); }
+
+@media (prefers-reduced-motion: reduce) {
+  .proj__media, .proj__caption, .proj__image, .proj__video { transition: none; }
+}
